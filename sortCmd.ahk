@@ -49,7 +49,7 @@ return
 */
 ::wdzs::
 FormatTime, now_date, %A_Now%, yyyy/MM/dd  HH:mm:ss ;格式化当前时间
-IfWinActive ahk_exe Code.exe   ;置顶窗口为vscode 则执行以下程序
+IfWinActive ahk_exe Code.exe   ;置顶窗口为vscode ，使用下面的脚本
 {
          Var =
             (
@@ -66,8 +66,9 @@ IfWinActive ahk_exe Code.exe   ;置顶窗口为vscode 则执行以下程序
             SendInput ,* @version v1.0.0.0 `n
             SendInput ,* @date %now_date% `n
             SendInput ,*/
-            }
-IfWinActive ahk_class Notepad++ ;置顶窗口为notepad++ 则执行以下程序
+      return     ;结束脚本
+}
+IfWinActive ahk_class Notepad++                         ;置顶窗口为notepad++，使用下面的脚本
 {
    Var =
    (
@@ -79,13 +80,9 @@ IfWinActive ahk_class Notepad++ ;置顶窗口为notepad++ 则执行以下程序
    `b`b`b*/
    )
    SendInput {Raw}%Var%
+      return              ;结束脚本
    }
-return
-
-
-;~ 方法注释
-::ffzs::
-FormatTime, now_date, %A_Now%, yyyy/MM/dd  hh:mm:ss ;格式化当前时间
+;其它文本编辑器环境使用的脚本
 Var =
 (
 /**
@@ -97,3 +94,32 @@ Var =
 )
 SendInput %Var%
 return
+
+
+;~ 方法注释
+::ffzs::
+FormatTime, now_date, %A_Now%, yyyy/MM/dd  HH:mm:ss ;格式化当前时间
+Var =
+(
+/**
+* @brief 注释
+* @author jianan
+* @version v1.0.0.0
+* @date %now_date%
+*/
+)
+SendInput %Var%
+return
+
+/**
+* @brief 快速打开帮助文档  F3 + h 打开php文档
+* @author jianan
+* @version v1.0.0.0
+* @date 2018/01/25  23:19:44
+*/
+F3 &  h::    ; 热键  按下 F3 + h 执行以下代码
+;文档地址 http://www.php.cn/xiazai/shouce
+run,D:\我的项目\chm\php\php_7.chm,,max  ;打开并最大化php7chm帮助文档
+return
+
+
